@@ -1,0 +1,175 @@
+<!DOCTYPE html><html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DnD5e MinMaxer: Configs</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='brain_favicon.png') }}"> 
+        <link href="//fonts.googleapis.com/css?family=Megrim%7CLato" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+        <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='styles/main.css') }}">
+        <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+        <script type="text/javascript">
+            $(document).on('submit', '#character_json_select_form', function(event){
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/input_character_json_select',
+                    data: $('form').serialize(),
+                    success: function(resp) {
+                        var parsed_resp = JSON.parse(resp);
+                        document.getElementById("json_editor").value = JSON.stringify(parsed_resp, undefined, 4);
+                    }, error: function(xhr) {
+                        console.error("Error:", xhr.responseText);
+                    }
+                })
+            });
+
+            $(document).on('click', '#save_char_input', function() {
+                var text_area_value = document.getElementById("json_editor").value;
+                var selected_char = document.getElementById("character_sheet_select").value;
+                var new_pass_char = document.getElementById("new_char_input").value;
+
+                if (selected_char === "" & new_pass_char === "") {
+                    alert("Must select an existing character or input a new name!");
+                    return;
+                } else if (selected_char != "" & new_pass_char === "") {
+                    var final_selected_char = selected_char;
+                } else {
+                    var final_selected_char = new_pass_char;
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/save_character_json_input',
+                    dataType: 'html',
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        text_area: text_area_value,
+                        editing_character: final_selected_char,
+                    }),
+                    success: function(resp) {
+                        $('#character_sheet_select').html(resp);
+                    }, error: function(xhr) {
+                        console.error("Error:", xhr.responseText);
+                    }
+                });               
+            });
+
+            $(document).on('click', '#new_character_sheet', function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/new_character_json_input',
+                    success: function(resp) {
+                        document.getElementById("json_editor").value = JSON.stringify(resp, undefined, 4);
+                    }, error: function(xhr) {
+                        console.error("Error:", xhr.responseText);
+                    }
+                });   
+            })
+        </script>
+    </head>
+        
+    <body>
+    
+        <br><br><br>
+      
+        <center>
+        <table style="width:95%" cellpadding="0" cellspacing="0"> 
+            <tr>
+                <td class="header"  height="60"> 
+                    <center>
+                        <a>
+                            <img src="{{ url_for('static', filename='fire.gif') }}" width=15 height=15>5e MinMaxer for Nerds<img src="{{ url_for('static', filename='fire.gif') }}" width=15 height=15>
+                        </a>
+                    </center>            
+                </td>
+            </tr>
+            <tr>
+                <td class="navigation" valign="top"> 
+                <center>
+                    <a href="{{ url_for('minmax_formpage')}}"><img src="{{ url_for('static', filename='home.gif')}}" height="32" class="icon" alt="home"><br>Home</a>  
+                    <a href="{{ url_for('modify_character_sheets') }}"><img src="{{ url_for('static', filename='pencil.gif') }}" height="32" class="icon" alt="pen"><br>Sheets</a> 
+                    <a href="https://www.dndbeyond.com/sources/dnd/phb-2024" target="_blank"><img src="{{ url_for('static', filename='books.gif') }}" height="32" class="icon" alt="5e_rulebook"><br>Rules</a> 
+                    <a href="https://github.com/colinsyyip/DnD_Soundboard" target="_blank"><img src="{{ url_for('static', filename='music.gif') }}" height="32" class="icon" alt="paint"><br>Beepboop</a> 
+                    <a href="https://github.com/colinsyyip?tab=repositories" target="_blank"><img src="{{ url_for('static', filename='computer.gif') }}" height="32" class="icon" alt="git_link"><br>Source</a> 
+                    <!-- <a href=""><img src="https://files.catbox.moe/nafoo9.png" height="32" class="icon" alt="cam"><br> link</a> 
+                    <a href=""><img src="https://files.catbox.moe/ggt4px.gif" height="32" class="icon" alt="faq"><br> link</a>  
+                    <a href=""><img src="https://files.catbox.moe/su2ve8.jpg" height="32" class="icon" alt="globe"><br> link</a> -->  
+                </center>
+                </td>
+            </tr>
+        </table>
+      
+        <table style="width:95%" cellpadding="4" cellspacing="0">
+            <tr height="640px">
+                <td class="content" style="width:25%;" valign="top">
+                    <div class="title">Character Config File Select</div>
+                    <div>
+                        Note this only provides an option to edit the .json file, NOT the .csv where abilities are stored.
+                    </div>
+                    <form class="character_json_select_form" id="character_json_select_form">
+                        <div style="margin-top: 8px; text-align: center" id="char_select_div">
+                            <select class="char_json_select" name="chosen_char_sheet" id="character_sheet_select" size="25">
+                                <option selected disabled value="">Select character...</option>
+                                {% for character in available_characters %}
+                                    <option value="{{character}}" name="chosen_char_sheet">{{character}}</option>"
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="char_select_div">
+                            <button type="submit" class="char_select_button"><img src="{{ url_for('static', filename='point.png') }}"></button>
+                        </div>
+                    </form>
+                    <div class="title">New Character Name</div>
+                    <div style="text-align: center">
+                        <input id="new_char_input" class="char_name_input" type="text" value="">
+                    </div>
+                </td>
+                <td class="content" style="width:75%;" valign="top">
+                    <div class="title">Character Config Editor</div>
+                    <div style="display:flex; flex-wrap:wrap; flex-direction:row">
+                        <div>
+                            <textarea id="json_editor" class="json_editor" rows="35" cols="175">Please select a character from the menu on the left...</textarea>
+                        </div>
+                        <div class="config_editor_buttons">
+                            <div class="editor_button" id="save_char_input">
+                                <a><img src="{{ url_for('static', filename='save.gif')}}" height="32" class="icon" alt="save"><br>Save</a>  
+                            </div>
+                            <!-- <div class="editor_button" id="download_json">
+                                <a><img src="{{ url_for('static', filename='download.gif')}}" height="32" class="icon" alt="save"><br>Download</a>  
+                            </div> -->
+                            <div class="editor_button" id="new_character_sheet">
+                                <a ><img src="{{ url_for('static', filename='new_sheet.gif')}}" height="32" class="icon" alt="save"><br>New Sheet</a>  
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+      
+        <table style="width:95%" height="20" cellpadding="0" cellspacing="0"> 
+            <tr>
+            
+                <td class="footer" valign="top"> 
+                    <!--PLEASE DO NOT DELETE THIS !! -->
+                    <center>
+                    Layout <a href="http://itinerae.neocities.org" target="_blank">Itinerae</a> // 
+                    <a href="https://artwork.neocities.org/oldweb" target="_blank">Icons,</a> 
+                    <a href="https://jasminnie.weebly.com/pixels1.html" target="_blank">Pixels, </a> 
+                    <a href="https://jsfiddle.net/naocrrds/bfzs7Lp0/" target="_blank">Scrollbar, </a> 
+                    <a href="https://www.flaticon.com/free-icons/brain" title="brain icons">Favicon</a>
+                    </center>
+                
+                </td>
+            
+            </tr>
+        </table>
+    
+        </center>
+      
+        </body>
+    </html>
+      
+      
+      
+    

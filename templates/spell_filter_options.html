@@ -1,0 +1,4 @@
+<option {{ ability_filter_form_fill(filter_type='spell_level', filter_value='all') }} value="all">All!</option>
+{% for spell_level in all_spell_levels %}
+    <option {{ ability_filter_form_fill(filter_type='spell_level', filter_value=spell_level) }} value="{{spell_level}}" name="spell_level">{{spell_level}}</option>"
+{% endfor %}

@@ -1,0 +1,514 @@
+<!DOCTYPE html><html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DnD5e MinMaxer</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='brain_favicon.png') }}"> 
+        <link href="//fonts.googleapis.com/css?family=Megrim%7CLato" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+        <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='styles/main.css') }}">
+        <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/hit_tables_fill',
+                    contentType: "application/json",
+                    dataType: "html",
+                    success: function(resp) {
+                        $('#hit_tables').html(resp);
+                    }, error: function(xhr) {
+                        console.error("Error:", xhr.responseText);
+                    }
+                });
+            });
+            $(document).on('submit', '#target_stat_form', function(event){
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/input_target_stats',
+                    data: $('form').serialize(),
+                    success: function() {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/hit_tables_fill',
+                            contentType: "application/json",
+                            dataType: "html",
+                            success: function(resp) {
+                                console.log("Successful target stats post. Updating tables.")
+                                $('#hit_tables').html(resp);
+                            }, error: function(xhr) {
+                                console.error("Error:", xhr.responseText);
+                            }
+                        });
+                    }, error: function(xhr) {
+                        console.error("Error:", xhr.responseText);
+                    }
+                })
+            });
+            $(document).on('submit', '#target_st_form', function(event){
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/input_target_st_prof',
+                    data: $('form').serialize(),
+                    success: function() {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/hit_tables_fill',
+                            contentType: "application/json",
+                            dataType: "html",
+                            success: function(resp) {
+                                console.log("Successful target stats post. Updating tables.")
+                                $('#hit_tables').html(resp);
+                            }, error: function(xhr) {
+                                console.error("Error:", xhr.responseText);
+                            }
+                        });
+                    }, error: function(xhr) {
+                        console.error("Error:", xhr.responseText);
+                    }
+                })
+            });
+            $(document).on('submit', '#target_rvi_form', function(event){
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/input_target_rvi',
+                    data: $('form').serialize(),
+                    success: function() {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/hit_tables_fill',
+                            contentType: "application/json",
+                            dataType: "html",
+                            success: function(resp) {
+                                console.log("Successful target stats post. Updating tables.")
+                                $('#hit_tables').html(resp);
+                            }, error: function(xhr) {
+                                console.error("Error:", xhr.responseText);
+                            }
+                        });
+                    }, error: function(xhr) {
+                        console.error("Error:", xhr.responseText);
+                    }
+                })
+            });
+
+            var char_stat_cells = document.getElementsByName("char_stat_box");
+            $(document).on('submit', '#character_select_form', function(event){
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/load_character_sheet',
+                    data: $('form').serialize(),
+                    success: function(resp) {
+                        for (const [key, value] of Object.entries(resp)) {
+                            var stat_cell = [...char_stat_cells].filter(x => x.id === key)[0];
+                            stat_cell.textContent = value;
+                        } 
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '/spell_filter_options_refresh',
+                            contentType: "application/json",
+                            dataType: "html",
+                            success: function(resp) {
+                                $('#spell_level_select').html(resp);
+                            }, error: function(xhr) {
+                                console.error("Error:", xhr.responseText);
+                            }
+                        })
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '/hit_tables_fill',
+                            contentType: "application/json",
+                            dataType: "html",
+                            success: function(resp) {
+                                console.log("Successful character select post. Updating tables.")
+                                $('#hit_tables').html(resp);
+                            }, error: function(xhr) {
+                                console.error("Error:", xhr.responseText);
+                            }
+                        })
+                    }, error: function(xhr) {
+                        console.error("Error:", xhr.responseText);
+                    }
+                })
+            });
+            $(document).on('submit', '#ability_filter_form', function(event){
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/input_ability_filters',
+                    data: $('form').serialize(),
+                    success: function() {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/hit_tables_fill',
+                            contentType: "application/json",
+                            dataType: "html",
+                            success: function(resp) {
+                                console.log("Successful target stats post. Updating tables.")
+                                $('#hit_tables').html(resp);
+                            }, error: function(xhr) {
+                                console.error("Error:", xhr.responseText);
+                            }
+                        });
+                    }, error: function(xhr) {
+                        console.error("Error:", xhr.responseText);
+                    }
+                })
+            });
+        </script>
+    </head>
+        
+    <body>
+    
+        <br><br><br>
+      
+        <center>
+        <table style="width:95%" cellpadding="0" cellspacing="0"> 
+            <tr>
+                <td class="header"  height="60"> 
+                    <center>
+                        <a>
+                            <img src="{{ url_for('static', filename='fire.gif') }}" width=15 height=15>5e MinMaxer for Nerds<img src="{{ url_for('static', filename='fire.gif') }}" width=15 height=15>
+                        </a>
+                    </center>            
+                </td>
+            </tr>
+            <tr>
+                <td class="navigation" valign="top"> 
+                <center>
+                    <a href="{{ url_for('minmax_formpage')}}"><img src="{{ url_for('static', filename='home.gif')}}" height="32" class="icon" alt="faq"><br>Home</a>  
+                    <a href="{{ url_for('modify_character_sheets') }}"><img src="{{ url_for('static', filename='pencil.gif') }}" height="32" class="icon" alt="pen"><br>Sheets</a> 
+                    <a href="https://www.dndbeyond.com/sources/dnd/phb-2024" target="_blank"><img src="{{ url_for('static', filename='books.gif') }}" height="32" class="icon" alt="5e_rulebook"><br>Rules</a> 
+                    <a href="https://github.com/colinsyyip/DnD_Soundboard" target="_blank"><img src="{{ url_for('static', filename='music.gif') }}" height="32" class="icon" alt="paint"><br>Beepboop</a> 
+                    <a href="https://github.com/colinsyyip?tab=repositories" target="_blank"><img src="{{ url_for('static', filename='computer.gif') }}" height="32" class="icon" alt="git_link"><br>Source</a> 
+                    <!-- <a href=""><img src="https://files.catbox.moe/nafoo9.png" height="32" class="icon" alt="cam"><br> link</a> 
+                    <a href=""><img src="https://files.catbox.moe/ggt4px.gif" height="32" class="icon" alt="faq"><br> link</a>  
+                    <a href=""><img src="https://files.catbox.moe/su2ve8.jpg" height="32" class="icon" alt="globe"><br> link</a> -->  
+                </center>
+                </td>
+            </tr>
+        </table>
+      
+        <table style="width:95%" cellpadding="4" cellspacing="0">
+            <tr height="640px">
+        
+                <td class="content" style="width:15%;" valign="top">
+                
+                    <div class="title">Target Stats</div>
+                    <form action="{{ url_for('input_target_stats') }}" id="target_stat_form" method='POST'> 
+                        <table style="width:100%; text-align: center">
+                                        <tr>
+                                                        <td><b>AC</b></td>  
+                                                        <td><b>Prof.</b></td>
+                                                        <td><b>HP</b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input class="text-input" type="text" id="target_AC" name="target_AC" value="{{ target_form_fill(variable='AC') }}" required></td>
+                                                        <td><input class="text-input" type="text" id="target_prof" name="target_prof" value="{{ target_form_fill(variable='Prof_Bonus') }}" required></td>
+                                                        <td><input class="text-input" type="text" id="target_HP" name="target_HP" value="{{ target_form_fill(variable='MaxHP') }}" required></td>
+                                                    </tr>
+                                        <tr>
+                                            <td><b>STR</b></td>
+                                            <td><b>DEX</b></td>
+                                            <td><b>CON</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="text-input" type="text" id="target_STR" name="target_STR" value="{{ target_form_fill(variable='STR') }}" required></td>
+                                            <td><input class="text-input" type="text" id="target_DEX" name="target_DEX" value="{{ target_form_fill(variable='DEX') }}" required></td>
+                                            <td><input class="text-input" type="text" id="target_CON" name="target_CON" value="{{ target_form_fill(variable='CON') }}" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>INT</b></td>
+                                            <td><b>WIS</b></td>
+                                            <td><b>CHA</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input class="text-input" type="text" id="target_INT" name="target_INT" value="{{ target_form_fill(variable='INT') }}" required></td>
+                                            <td><input class="text-input" type="text" id="target_WIS" name="target_WIS" value="{{ target_form_fill(variable='WIS') }}" required></td>
+                                            <td><input class="text-input" type="text" id="target_CHA" name="target_CHA" value="{{ target_form_fill(variable='CHA') }}" required></td>
+                                        </tr>
+                                </td>
+                                <tr>
+                                    <td width="100px" height="30px" colspan="3" text-align="center">
+                                        <button type="submit" style="padding-top:5px"><img src="{{ url_for('static', filename='point.png') }}"></button>
+                                    </td>
+                                </tr>
+                            </tr>
+                        </table>
+                    </form>
+                    <br>
+                    
+                    <div class="title">Saving Throw Proficiencies</div>
+
+                    <form action="{{ url_for('input_target_st_prof') }}" id="target_st_form" method='POST'>
+                        <table style="width:100%; text-align: center">
+                            <tr>
+                                <td><b>STR</b></td>
+                                <td><b>DEX</b></td>
+                                <td><b>CON</b></td>
+                            </tr>
+                            <tr>
+                                <td><input class="tick-input" type="checkbox" id="st_STR" name="st_STR" value="" {{ target_form_fill(variable='st_STR') }}></td>
+                                <td><input class="tick-input" type="checkbox" id="st_DEX" name="st_DEX" value="" {{ target_form_fill(variable='st_DEX') }}></td>
+                                <td><input class="tick-input" type="checkbox" id="st_CON" name="st_CON" value="" {{ target_form_fill(variable='st_CON') }}></td>
+                            </tr>
+                            <tr>
+                                <td><b>INT</b></td>
+                                <td><b>WIS</b></td>
+                                <td><b>CHA</b></td>
+                            </tr>
+                            <tr>
+                                <td><input class="tick-input" type="checkbox" id="st_INT" name="st_INT" value="" {{ target_form_fill(variable='st_INT') }}></td>
+                                <td><input class="tick-input" type="checkbox" id="st_WIS" name="st_WIS" value="" {{ target_form_fill(variable='st_WIS') }}></td>
+                                <td><input class="tick-input" type="checkbox" id="st_CHA" name="st_CHA" value="" {{ target_form_fill(variable='st_CHA') }}></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" width="100px" height="30px">
+                                    <button type="submit" style="padding-top:5px"><img src="{{ url_for('static', filename='point.png') }}"></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    
+                    <div class="title">Target R/V/I</div>
+                    <form action="{{ url_for('input_target_rvi') }}" id="target_rvi_form" method='POST'> 
+                        <table style="width:100%; text-align: center">
+                            <tr>
+                                <td>
+                                    <table style="width:100%; text-align: center">
+                                        <tr>
+                                            <td><b>Resistances</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="rvi_select" name="target_resist" id="target_resist_select" multiple>
+                                                    <option {{ target_form_fill(variable='target_resist_rvi') }} value="None">None!</option>
+                                                    {% for resist in available_resists %}
+                                                        <option {{ target_form_fill(variable='target_resist_rvi', rvi_type = resist) }} value="{{resist}}" name="target_resist">{{resist}}</option>"
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Vulnerabilities</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="rvi_select" name="target_vuln" id="target_vuln_select" multiple>
+                                                    <option {{ target_form_fill(variable='target_resist_rvi') }} value="None">None!</option>
+                                                    {% for vulnerability in available_vulnerabilities %}
+                                                        <option {{ target_form_fill(variable='target_vulnerability_rvi', rvi_type = vulnerability) }} value="{{vulnerability}}" name="target_vuln">{{vulnerability}}</option>"
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Immunities</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="rvi_select" name="target_immune" id="target_immune_select" multiple>
+                                                    <option {{ target_form_fill(variable='target_resist_rvi') }} value="None">None!</option>
+                                                    {% for immunity in availabe_immunities %}
+                                                        <option {{ target_form_fill(variable='target_immunity_rvi', rvi_type = immunity) }} value="{{immunity}}" name="target_immune">{{immunity}}</option>"
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100px" height="30px">
+                                                <button type="submit" style="padding-top:5px"><img src="{{ url_for('static', filename='point.png') }}"></button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <br><br>
+                    <div style="width:100%">
+                        <div style="width:35px; margin-left: auto;">
+                            <a href=" {{url_for('target_clear')}}"><img style="display: block;"src="{{ url_for('static', filename='recycle.gif') }}" title="Discard target configs."></a>
+                        </div>
+                    </div>
+                    
+                </td>
+
+                <td class="content" style="width:75%" valign="top" id="hit_tables">
+                
+                </td>
+            
+                <td class="rightside" style="width:20%" valign="top">
+                    
+                    <div class="title">Character Sheets</div>
+                    Character sheets must have a .csv file for actions on top of the base .json character sheet file to be found here!
+                    <br><br>
+                    <form action="{{ url_for('load_character_sheet') }}" id="character_select_form" method='POST'>
+                        <table>
+                            <tr>
+                                <td><label for="chosen_char_sheet">Character:</label></td>
+                                <td>
+                                    <select class="char_select" name="chosen_char_sheet" id="character_sheet_select">
+                                        <option {{ character_select_form_fill(char_name='placeholder') }} disabled value="">Select character...</option>
+                                        {% for character in available_characters %}
+                                            <option {{ character_select_form_fill(char_name=character) }} value="{{character}}" name="chosen_char_sheet">{{character}}</option>"
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="100px" height="30px" colspan="2" style="text-align: center;">
+                                    <button type="submit" style="padding-top:5px"><img src="{{ url_for('static', filename='point.png') }}"></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <br><br>
+                    
+                    <div class="title">Character Stats</div>
+                        <table style="width:100%; text-align: center" id="characater_stat_table">
+                            <tr>
+                                <td>
+                                    <table style="width:100%; text-align: center">
+                                        <tr>
+                                            <td><b>AC</b></td>  
+                                            <td><b>Prof.</b></td>
+                                            <td><b>HP</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td name="char_stat_box" id="AC">{{char_stats['AC']}}</td>
+                                            <td name="char_stat_box" id="Prof.">{{char_stats['Prof.']}}</td>
+                                            <td name="char_stat_box" id="MaxHP">{{char_stats['MaxHP']}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>STR</b></td>
+                                            <td><b>DEX</b></td>
+                                            <td><b>CON</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td name="char_stat_box" id="STR">{{char_stats['STR']}}</td>
+                                            <td name="char_stat_box" id="DEX">{{char_stats['DEX']}}</td>
+                                            <td name="char_stat_box" id="CON">{{char_stats['CON']}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>INT</b></td>
+                                            <td><b>WIS</b></td>
+                                            <td><b>CHA</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td name="char_stat_box" id="INT">{{char_stats['INT']}}</td>
+                                            <td name="char_stat_box" id="WIS">{{char_stats['WIS']}}</td>
+                                            <td name="char_stat_box" id="CHA">{{char_stats['CHA']}}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    <br><br> 
+                    
+                    <div class="title">Action Filters</div>
+                    <form ction="{{ url_for('input_ability_filters') }}"  id="ability_filter_form"> 
+                        <table style="width:100%; text-align: center">
+                            <tr>
+                                <td>
+                                    <table style="width:100%; text-align: center">
+                                        <!-- <tr>
+                                            <td><b>Roll Type</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="rvi_select" name="roll_type" id="roll_type_select" multiple>
+                                                    <option selected value="all">All!</option>
+                                                    {% for roll_type in all_roll_types %}
+                                                        <option value="{{roll_type}}" name="roll_type">{{roll_type}}</option>"
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr> -->
+                                        <tr>
+                                            <td><b>Spell Level</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="rvi_select" name="spell_level" id="spell_level_select" multiple>
+                                                    <option {{ ability_filter_form_fill(filter_type='spell_level', filter_value='all') }} value="all">All!</option>
+                                                    {% for spell_level in all_spell_levels %}
+                                                        <option {{ ability_filter_form_fill(filter_type='spell_level', filter_value=spell_level) }} value="{{spell_level}}" name="spell_level">{{spell_level}}</option>"
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Action Type</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="rvi_select" name="action_type" id="action_type_select" multiple>
+                                                    <option {{ ability_filter_form_fill(filter_type='action_type', filter_value='all') }} value="all">All!</option>
+                                                    {% for action_type in all_action_types %}
+                                                        <option {{ ability_filter_form_fill(filter_type='action_type', filter_value=action_type) }} value="{{action_type}}" name="action_type">{{action_type}}</option>"
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Damage Type</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="rvi_select" name="damage_type" id="damage_type_select" multiple>
+                                                    <option {{ ability_filter_form_fill(filter_type='damage_type', filter_value='all') }} value="all">All!</option>
+                                                    {% for damage_type in all_damage_types %}
+                                                        <option {{ ability_filter_form_fill(filter_type='damage_type', filter_value=damage_type) }} value="{{damage_type}}" name="damage_type">{{damage_type}}</option>"
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100px" height="30px">
+                                                <button type="submit" style="padding-top:5px"><img src="{{ url_for('static', filename='point.png') }}"></button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <br><br>  
+                    
+                </td>
+
+        </table>
+      
+        <table style="width:95%" height="20" cellpadding="0" cellspacing="0"> 
+            <tr>
+            
+                <td class="footer" valign="top"> 
+                    <!--PLEASE DO NOT DELETE THIS !! -->
+                    <center>
+                    Layout <a href="http://itinerae.neocities.org" target="_blank">Itinerae</a> // 
+                    <a href="https://artwork.neocities.org/oldweb" target="_blank">Icons,</a> 
+                    <a href="https://jasminnie.weebly.com/pixels1.html" target="_blank">Pixels, </a> 
+                    <a href="https://jsfiddle.net/naocrrds/bfzs7Lp0/" target="_blank">Scrollbar, </a> 
+                    <a href="https://www.flaticon.com/free-icons/brain" title="brain icons">Favicon</a>
+                    </center>
+                
+                </td>
+            
+            </tr>
+        </table>
+    
+        </center>
+      
+        </body>
+    </html>
+      
+      
+      
+    

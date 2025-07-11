@@ -1,0 +1,71 @@
+<div class="title">Optimal Actions by Probability of Hit</div>
+                        
+<div style="display:flex; flex-wrap:wrap; flex-direction:row" id="phit_table">
+        
+    {% for roll_type in all_roll_types %}
+        <div class="table_children">
+            <div class="hit_table_header"><b>{{roll_type}}</b></div>
+            <div style="display:flex; flex-wrap:wrap; flex-direction:row; padding-bottom: 2px; border-bottom: 1px solid">
+                <div style="width:30%" class="hit_table_subheader"><b>Prob.</b></div>
+                <div style="width:70%" class="hit_table_subheader">Action</div>
+            </div>
+            <div id="phit_children">
+                {% for phit_item in phit_items[roll_type] %}
+                    <div style="display:flex; flex-wrap:wrap; flex-direction:row; padding-bottom: 3px; padding-top: 3px" class= "{{ 'highlight' if loop.first }}">
+                        <div style="width:25%" class="hit_table_entry">{{phit_item[0]}}</div>
+                        <div style="width:75%" class="hit_table_entry">{{phit_item[1]}}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    {% endfor %}
+</div>
+
+
+<div class="title">Optimal Actions by Expected Hit Amount</div>
+
+<div style="display:flex; flex-wrap:wrap; flex-direction:row" id="phit_table">
+    {% for roll_type in all_roll_types %}
+        <div class="table_children">
+            <div class="hit_table_header"><b>{{roll_type}}</b></div>
+            <div style="display:flex; flex-wrap:wrap; flex-direction:row; padding-bottom: 2px; border-bottom: 1px solid">
+                <div style="width:30%;" class="hit_table_subheader"><b>Hit</b></div>
+                <div style="width:70%;" class="hit_table_subheader">Action</div>
+            </div>
+            <div id="ehit_children">
+                {% for ehit_item in ehit_items[roll_type] %}
+                <div style="display:flex; flex-wrap:wrap; flex-direction:row; padding-bottom: 3px; padding-top: 3px" class= "{{ 'highlight' if loop.first }}">
+                        <div style="width:25%" class="hit_table_entry">{{ehit_item[0]}}</div>
+                        <div style="width:75%" class="hit_table_entry">{{ehit_item[1]}}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    {% endfor %}
+</div>
+
+<div class="title">Optimal Actions by Economy Score</div>
+
+<div style="display:flex; flex-wrap:wrap; flex-direction:row" id="phit_table">
+    {% for roll_type in all_roll_types %}
+        <div class="table_children">
+            <div class="hit_table_header"><b>{{roll_type}}</b></div>
+            <div style="display:flex; flex-wrap:wrap; flex-direction:row; padding-bottom: 2px; border-bottom: 1px solid">
+                <div style="width:30%;" class="hit_table_subheader"><b>Econ.</b></div>
+                <div style="width:70%;" class="hit_table_subheader">Action</div>
+            </div>
+            <div id="econ_children">
+                {% for econ_item in econ_items[roll_type] %}
+                <div style="display:flex; flex-wrap:wrap; flex-direction:row; padding-bottom: 3px; padding-top: 3px" class= "{{ 'highlight' if loop.first }}">
+                        <div style="width:25%;" class="hit_table_entry">{{econ_item[0]}}</div>
+                        <div style="width:75%;" class="hit_table_entry">{{econ_item[1]}}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

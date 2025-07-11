@@ -1,0 +1,381 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>itinerae : greyscale</title>
+<link rel="shortcut icon" href="https://files.catbox.moe/rshw42.png"> 
+<link href="//fonts.googleapis.com/css?family=Megrim%7CLato" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+
+
+    
+<style>
+  
+body {
+background:#444 url(https://files.catbox.moe/95kd3y.gif) fixed;
+font-family: 'lato', verdana, arial;
+font-size: 9px;
+color:#666;
+letter-spacing: 1px;
+line-height:10px;}
+             
+  
+a:link, a:visited, a:active { 
+color:#222;text-decoration:none;}
+a:hover {
+color:#ddd;}
+  
+
+      b {color:#444;font-weight:bold;}
+      i {font-style:italic;color:#aaa;}
+      u {color:#888;text-decoration:underline;}
+  
+  img {border:0;}
+  textarea {font:9px 'lato', verdana;letter-spacing:1px;}
+     
+
+
+  ::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;}
+
+  ::-webkit-scrollbar-track {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAFElEQVQIW2M4fPz0////GYAYyAIASnoKpV3w4kgAAAAASUVORK5CYII=");
+    image-rendering: pixelated;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);}
+
+  ::-webkit-scrollbar-track:active {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEElEQVQIW2No6+pjgAAgCwAWogM9VKrgGQAAAABJRU5ErkJggg==");
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);}
+
+  ::-webkit-scrollbar-thumb {
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    box-shadow: inset 1px 1px 0 0 white, inset -1px -1px 0 0 #868a8e;
+    width: 16px;
+    height: 16px;
+    background-color: #cccccc;
+    z-index: 1;}
+
+  ::-webkit-scrollbar-corner {
+    background-color: #cccccc;}
+
+  ::-webkit-resizer {
+    width: 16px;
+    height: 16px;
+    background-color: #cccccc;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAN0lEQVR4Ae3MgQUAMBRDwU5fFF05lb/CARTBw2Ulof0DxPtcwp3hNuEYnjbcEW4TjuFpwx3h9gMWGgZ2Y/PT2gAAAABJRU5ErkJggg==");
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;}
+
+  ::-webkit-scrollbar-button,
+  ::-webkit-scrollbar-button {
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    box-shadow: inset 1px 1px 0 0 white, inset -1px -1px 0 0 #868a8e;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: #cccccc;
+    image-rendering: pixelated;
+    background-repeat: no-repeat;
+    background-position: center center;}
+
+  ::-webkit-scrollbar-button:active,
+  ::-webkit-scrollbar-button:active {
+    background-position: 2px 2px;}
+
+  ::-webkit-scrollbar-button:horizontal:decrement,
+  ::-webkit-scrollbar-button:horizontal:decrement {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAHklEQVQY02NgoBT8xyX8H5fwf1zCpOjAYwceV1EEAAO2D/HsQ4vsAAAAAElFTkSuQmCC");}
+
+  ::-webkit-scrollbar-button:horizontal:increment,
+  ::-webkit-scrollbar-button:horizontal:increment {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAHUlEQVQY02NgIB/8xy3xH7fEf9wS/0nUQZqrKAYAK44P8ZRmzLQAAAAASUVORK5CYII=");}
+
+  ::-webkit-scrollbar-button:vertical:decrement,
+  ::-webkit-scrollbar-button:vertical:decrement {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGklEQVR4AWMYxuA/SYphmETFhDX9x4mHGQAAcL4P8dQiMq8AAAAASUVORK5CYII=");}
+
+  ::-webkit-scrollbar-button:vertical:increment,
+  ::-webkit-scrollbar-button:vertical:increment {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAF0lEQVQY02NgoBf4jwJxSOHQhcNAOgMAWWAP8Rv2U3UAAAAASUVORK5CYII=");}
+
+  ::-webkit-scrollbar-button:horizontal:increment:start,
+  ::-webkit-scrollbar-button:horizontal:increment:start {
+    display: none;}
+
+  ::-webkit-scrollbar-button:horizontal:decrement:end,
+  ::-webkit-scrollbar-button:horizontal:decrement:end {
+    display: none;}
+
+  ::-webkit-scrollbar-button:vertical:increment:start,
+  ::-webkit-scrollbar-button:vertical:increment:start {
+    display: none;}
+
+  ::-webkit-scrollbar-button:vertical:decrement:end,
+  ::-webkit-scrollbar-button:vertical:decrement:end {
+    display: none;}
+
+  ::-webkit-scrollbar-button:active,
+  ::-webkit-scrollbar-button:active {
+    border-top: 1px solid #868a8e;
+    border-left: 1px solid #868a8e;
+    border-bottom: 1px solid #868a8e;
+    border-right: 1px solid #868a8e;
+    box-shadow: none;}
+  
+   
+.header {background:#aaa url();color:#BCACCC;text-align:center;border-top-right-radius:30px;border-top-left-radius:30px;border:2px solid #444;border-bottom:0px;}
+
+.header a {font-family: 'silkscreen', monospace;font-size:20px;text-decoration:underline;color:#fff;letter-spacing:3px;text-shadow: 1px 1px 2px black;}
+
+  
+.navigation {background:#FFf;margin-top:0px;border-top:1px solid #111;border-bottom:1px solid #111;}
+
+.navigation a {
+display:inline-block;
+background:transparent;
+text-align:center;
+margin-bottom:2px;
+margin-right:4px;
+padding-bottom:2px;
+padding-top:2px;
+font:normal 9px 'silkscreen',arial;
+line-height:10px;
+text-transform:uppercase;
+letter-spacing:1px;
+color:#444;
+width:75px;}
+
+.navigation a:hover {
+background:#f0f0f0;
+color:#000;}
+  
+.icon {margin-bottom:4px;margin-top:4px;}
+
+.marquee {background:#444;color:#ddd;font:9px 'silkscreen', verdana;padding:2px;}
+
+.leftside {background: #FFF; border-right: 2px solid #444;}
+.content {background: #FFF; border-right: 2px solid #444;}
+.rightside {background: #FFF;}
+.footer {background: #606060;color:#ccc; border-top:1px solid #111;
+ border-bottom-left-radius:10px;border-bottom-right-radius:10px;line-height:20px;}
+.footer a {color:#fff;}
+  
+.scrollbox {height:90px;border:1px solid #888;border-right:0px;padding:6px;margin-bottom:3px;overflow:scroll;overflow-x:hidden;}
+  
+.title {font: 10px 'silkscreen', verdana;color:#999;letter-spacing:1px;text-align:left;padding:0px;padding-left:4px;
+margin-bottom:4px;text-transform:uppercase;background:#eee;border-bottom:1px solid #ddd;}
+  
+</style>
+</head>
+  
+  
+  
+<body>
+
+  
+  <br><br><br>
+  
+
+  
+<center>
+<table width="600" cellpadding="4" cellspacing="0"> 
+<tr>
+<td class="header"  height="90"> 
+<center>
+<a href=""><img src="https://files.catbox.moe/rshw42.png" alt="star"> your site name <img src="https://files.catbox.moe/rshw42.png" alt="star"></a>
+</center>
+  
+</td>
+</tr>
+</table>
+  
+  
+  
+<table width="600" cellpadding="0" cellspacing="0"> 
+<tr>
+<td class="marquee" valign="top"> 
+<marquee direction="left">  Maybe updates? Or buttons?  Please don't remove the credits from the bottom of the site.   </marquee>
+</td>
+</tr>
+</table>
+  
+  
+  
+  
+<table width="600" cellpadding="0" cellspacing="0"> 
+<tr>
+<td class="navigation" valign="top"> 
+<center>
+<a href=""><img src="https://files.catbox.moe/k8yx7i.gif" height="32" class="icon" alt="computer"><br> link</a> 
+<a href=""><img src="https://files.catbox.moe/q65h03.png" height="32" class="icon" alt="book"><br> link</a> 
+<a href=""><img src="https://files.catbox.moe/ie5d9v.png" height="32" class="icon" alt="paint"><br> link</a> 
+<a href=""><img src="https://files.catbox.moe/nafoo9.png" height="32" class="icon" alt="cam"><br> link</a> 
+<a href=""><img src="https://files.catbox.moe/ggt4px.gif" height="32" class="icon" alt="faq"><br> link</a>  
+<a href=""><img src="https://files.catbox.moe/su2ve8.jpg" height="32" class="icon" alt="globe"><br> link</a>  
+<a href=""><img src="https://files.catbox.moe/sx5jag.gif" height="32" class="icon" alt="pen"><br> link</a>  
+</center>
+</td>
+</tr>
+</table>
+  
+  
+
+  
+<table width="600" cellpadding="4" cellspacing="0">
+<tr>
+<td class="leftside" width="150" valign="top">
+ 
+  
+<div class="title">title here <img src="https://64.media.tumblr.com/3cac94a7d41dfd4690d418c5b2b8bca2/7ff5f8980156b828-8b/s75x75_c1/f6c3dc9dd6acf5fc74ff0a4465a8e5ed1c2d9531.pnj" align="right" alt="x"> </div>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique tellus arcu, nec pulvinar dolor pretium in.
+Nulla ac volutpat tortor. Mauris elementum augue vel massa sagittis aliquam. <b>Bold text.</b> <i>Italic text.</i> <a href="">Link.</a>
+<br><br>
+
+  
+<div class="title">scrollbox <img src="https://64.media.tumblr.com/3cac94a7d41dfd4690d418c5b2b8bca2/7ff5f8980156b828-8b/s75x75_c1/f6c3dc9dd6acf5fc74ff0a4465a8e5ed1c2d9531.pnj" align="right" alt="x"> </div>
+  
+<div class="scrollbox">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique tellus arcu, nec pulvinar dolor pretium in.
+Nulla ac volutpat tortor. Mauris elementum augue vel massa sagittis aliquam. <br><br>
+Curabitur convallis rhoncus orci, et luctus erat aliquam et. In hac habitasse platea dictumst. In egestas turpis nisl, vel mollis purus porta vel. In hac habitasse platea dictumst. Nulla ac volutpat tortor. Mauris elementum augue vel massa sagittis aliquam.
+</div>
+<br>
+  
+  
+<div class="title">
+title here <img src="https://64.media.tumblr.com/3cac94a7d41dfd4690d418c5b2b8bca2/7ff5f8980156b828-8b/s75x75_c1/f6c3dc9dd6acf5fc74ff0a4465a8e5ed1c2d9531.pnj" align="right" alt="x"></div>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique tellus arcu, nec pulvinar dolor pretium in. 
+Integer nec rhoncus risus.
+<br><br>
+  
+  
+<div class="title">
+title here <img src="https://64.media.tumblr.com/3cac94a7d41dfd4690d418c5b2b8bca2/7ff5f8980156b828-8b/s75x75_c1/f6c3dc9dd6acf5fc74ff0a4465a8e5ed1c2d9531.pnj" align="right" alt="x"></div>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique tellus arcu, nec pulvinar dolor pretium in. 
+Nulla ac volutpat tortor. Mauris elementum augue vel massa sagittis aliquam. 
+
+  
+</td>
+  
+  
+  
+  
+
+<td class="content" width="300" valign="top">
+  
+<div class="title">
+title here</div>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique tellus arcu, nec pulvinar dolor pretium in. 
+Nullam eget sapien sodales, tempor nisi eu, bibendum dolor. Quisque id dolor dui. Fusce sed ultricies nulla. 
+Vestibulum ultrices auctor mollis. Nulla aliquam ac libero id euismod. 
+<br><br>
+
+<div class="title">
+title here </div>
+Curabitur convallis rhoncus orci, et luctus erat aliquam et. In hac habitasse platea dictumst. 
+In egestas turpis nisl, vel mollis purus porta vel. In hac habitasse platea dictumst. Nulla ac volutpat tortor. 
+Mauris elementum augue vel massa sagittis aliquam. Sed ornare odio nec purus vulputate, et pharetra erat fringilla.   
+Ut luctus, quam ac aliquam dictum, quam ligula pellentesque eros, sit amet dictum libero lacus accumsan orci. 
+Integer nec rhoncus risus. Nulla in nunc eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<br><br>
+
+  
+<div class="title"> 
+title here </div>
+Mauris purus sem, ornare eu dolor et, pretium placerat lacus. Cras felis turpis, congue eget condimentum at, hendrerit at lorem. Suspendisse laoreet id justo eget rutrum. Curabitur sollicitudin ante leo, a posuere ex porttitor quis. Cras ac bibendum lacus. Etiam lacinia ipsum a aliquam facilisis. Curabitur lectus magna, pharetra a massa nec, maximus auctor ex. Pellentesque fringilla a odio eget efficitur. Proin tristique pellentesque volutpat.
+<br><br>
+  
+ <div class="title">
+title here </div>
+In hac habitasse platea dictumst. Nulla ac volutpat tortor. 
+Mauris elementum augue vel massa sagittis aliquam. Sed ornare odio nec purus vulputate, et pharetra erat fringilla.   
+Ut luctus, quam ac aliquam dictum, quam ligula pellentesque eros, sit amet dictum libero lacus accumsan orci. 
+<br><br> 
+
+</td>
+
+  
+  
+  
+
+<td class="rightside" width="150" valign="top">
+  
+<div class="title">
+title here <img src="https://64.media.tumblr.com/3cac94a7d41dfd4690d418c5b2b8bca2/7ff5f8980156b828-8b/s75x75_c1/f6c3dc9dd6acf5fc74ff0a4465a8e5ed1c2d9531.pnj" align="right" alt="x"></div>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique tellus arcu, nec pulvinar dolor pretium in.
+Nulla ac volutpat tortor. Mauris elementum augue vel massa sagittis aliquam. 
+<br><br>
+  
+  
+<div class="title">
+title here <img src="https://64.media.tumblr.com/3cac94a7d41dfd4690d418c5b2b8bca2/7ff5f8980156b828-8b/s75x75_c1/f6c3dc9dd6acf5fc74ff0a4465a8e5ed1c2d9531.pnj" align="right" alt="x"> </div>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique tellus arcu, nec pulvinar dolor pretium in. 
+Integer nec rhoncus risus.
+<br><br>
+  
+  
+<div class="title">scrollbox <img src="https://64.media.tumblr.com/3cac94a7d41dfd4690d418c5b2b8bca2/7ff5f8980156b828-8b/s75x75_c1/f6c3dc9dd6acf5fc74ff0a4465a8e5ed1c2d9531.pnj" align="right" alt="x"> </div>
+
+<div class="scrollbox">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique tellus arcu, nec pulvinar dolor pretium in.
+Nulla ac volutpat tortor. Mauris elementum augue vel massa sagittis aliquam. <br><br>
+Curabitur convallis rhoncus orci, et luctus erat aliquam et. In hac habitasse platea dictumst. In egestas turpis nisl, vel mollis purus porta vel. In hac habitasse platea dictumst. Nulla ac volutpat tortor. Mauris elementum augue vel massa sagittis aliquam.
+</div>
+<br>
+  
+<div class="title">
+title here <img src="https://64.media.tumblr.com/3cac94a7d41dfd4690d418c5b2b8bca2/7ff5f8980156b828-8b/s75x75_c1/f6c3dc9dd6acf5fc74ff0a4465a8e5ed1c2d9531.pnj" align="right" alt="x"></div>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique tellus arcu, nec pulvinar dolor pretium in. 
+Nulla ac volutpat tortor. Mauris elementum augue vel massa sagittis aliquam. 
+
+  
+</td>
+</table>
+  
+  
+  
+  
+  
+<table width="600" height="20" cellpadding="0" cellspacing="0"> 
+<tr>
+
+<td class="footer" valign="top"> 
+<!--PLEASE DO NOT DELETE THIS !! -->
+<center>
+Layout <a href="http://itinerae.neocities.org" target="_blank">Itinerae</a> // 
+<a href="https://artwork.neocities.org/oldweb" target="_blank">Icons,</a> 
+<a href="https://jasminnie.weebly.com/pixels1.html" target="_blank">Pixels, </a> 
+<a href="https://jsfiddle.net/naocrrds/bfzs7Lp0/" target="_blank">Scrollbar</a> 
+</center>
+   
+</td>
+  
+</tr>
+</table>
+
+
+ 
+  
+  
+</center>
+  
+</body>
+</html>
+  
+  
+  
